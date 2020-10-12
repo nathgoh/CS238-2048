@@ -1,1 +1,2 @@
-# CS238-2048
+## CS238 Project 2^11
+### Katherine Wu, Simon Tao, Nathaniel Goenawan
