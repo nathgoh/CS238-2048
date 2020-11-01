@@ -1,4 +1,5 @@
 import random
+import copy
 
 class Game2048():
     def __init__(self):
@@ -11,7 +12,8 @@ class Game2048():
         while not self.game_end:
             row, col = random.randint(0, 3), random.randint(0, 3)
             if self.matrix[row][col] == 0:
-                self.matrix[row][col] == random.choice([2, 4])
+                self.matrix[row][col] = random.choice([2, 4])
+                return
     
     def rotate(self):
         out = []
@@ -27,6 +29,7 @@ class Game2048():
             self.rotate()
 
     def merge(self):
+        matrix_copy = copy.deepcopy(self.matrix)
         for col in range(len(self.matrix[0])):
             s = []
             for row in range(len(self.matrix)):
@@ -37,15 +40,16 @@ class Game2048():
                 if s[i] == s[i+1]:
                     s[i] *= 2
                     s.pop(i+1)
-                    i-=1
-                i+=1
+                    i -= 1
+                i += 1
             for row in range(len(self.matrix)):
                 if len(s) > 0:
                     val = s.pop(0)
                     self.matrix[row][col] = val
                 else:
                     self.matrix[row][col] = 0
-        self.get_number()
+        if matrix_copy != self.matrix:
+            self.get_number()
 
     def move_up(self):
         self.merge()
@@ -53,7 +57,7 @@ class Game2048():
     def move_down(self):
         self.double_rotate()
         self.merge()
-        self.rotate()
+        self.double_rotate()
 
     def move_right(self):
         self.double_rotate()
