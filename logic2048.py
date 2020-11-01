@@ -6,14 +6,33 @@ class Game2048():
         self.matrix = [[0,0,0,0] for i in range(4)]
         self.matrix[random.randint(0, 3)][random.randint(0, 3)] = random.choice([2, 4])
         self.game_end = False
+
+    def check_game(self):
+        # If there is at least one empty square
+        self.game_end = not (0 in self.matrix[0] or 0 in self.matrix[1] or 0 in self.matrix[2] or 0 in self.matrix[3])
+        
+        # If no empty square but you can still merge
+        if self.game_end:
+            for j in range(3): 
+                for k in range(3): 
+                    if(self.matrix[j][k] == self.matrix[j + 1][k] or self.matrix[j][k] == self.matrix[j][k + 1]): 
+                        self.game_end = False
+
+            for j in range(3): 
+                if(self.matrix[3][j] == self.matrix[3][j + 1]): 
+                    self.game_end = False                
+
+            for j in range(3): 
+                if(self.matrix[j][3] == self.matrix[j + 1][3]):  
+                    self.game_end = False
         
     def get_number(self):
-        self.game_end = not (0 in self.matrix[0] or 0 in self.matrix[1] or 0 in self.matrix[2] or 0 in self.matrix[3])
-        while not self.game_end:
+        row, col = random.randint(0, 3), random.randint(0, 3)
+        while self.matrix[row][col] != 0:
             row, col = random.randint(0, 3), random.randint(0, 3)
-            if self.matrix[row][col] == 0:
-                self.matrix[row][col] = random.choice([2, 4])
-                return
+            
+        self.matrix[row][col] = random.choice([2, 4])
+        
     
     def rotate(self):
         out = []
@@ -48,8 +67,11 @@ class Game2048():
                     self.matrix[row][col] = val
                 else:
                     self.matrix[row][col] = 0
+
         if matrix_copy != self.matrix:
             self.get_number()
+        
+        self.check_game()
 
     def move_up(self):
         self.merge()
