@@ -33,7 +33,6 @@ class Game2048():
             
         self.matrix[row][col] = random.choice([2, 4])
         
-    
     def rotate(self):
         out = []
         for col in range(len(self.matrix[0])):
@@ -69,8 +68,7 @@ class Game2048():
                     self.matrix[row][col] = 0
 
         if matrix_copy != self.matrix:
-            self.get_number()
-        
+            self.get_number()       
         self.check_game()
 
     def move_up(self):
