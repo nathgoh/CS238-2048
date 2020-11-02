@@ -114,4 +114,4 @@ class Game2048():
         return total_sum
 
     def max_num(self):
-        return max(max(self.matrix))
+        return max(map(max, self.matrix))
