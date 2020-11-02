@@ -7,7 +7,7 @@ using the sum of tiles
 """
 
 DEPTH = 10             
-NUM_ITERS = 10         
+NUM_ITERS = 100         
 
 def random_run(game, starting_move):
     game_copy = copy.deepcopy(game)
@@ -48,14 +48,14 @@ def monte_carlo_run():
     return game.max_num(), game.get_sum() 
 
 def main():
-    max_val_results = [0] * 100
-    total_sum_results = [0] * 100
+    max_val_results = [0] * 1000
+    total_sum_results = [0] * 1000
     
     for i in range(1000):
         max_val_results[i], total_sum_results[i] = monte_carlo_run()
         
-    total_sum_avg = sum(total_sum_results) / 100
-    max_val_avg = sum(max_val_results) / 100
+    total_sum_avg = sum(total_sum_results) / 1000
+    max_val_avg = sum(max_val_results) / 1000
 
     f = open("monte_carlo.txt", "w")
     f.write("avg max val: " + str(max_val_avg)) 
