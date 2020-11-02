@@ -7,6 +7,12 @@ class Game2048():
         self.matrix[random.randint(0, 3)][random.randint(0, 3)] = random.choice([2, 4])
         self.game_end = False
 
+    def __str__(self):
+        output = ""
+        for row in self.matrix:
+            output += str(row) + "\n"
+        return output
+
     def check_game(self):
         # If there is at least one empty square
         self.game_end = not (0 in self.matrix[0] or 0 in self.matrix[1] or 0 in self.matrix[2] or 0 in self.matrix[3])
@@ -90,3 +96,22 @@ class Game2048():
         self.merge()
         self.double_rotate()
         self.rotate()
+
+    def make_move(self, move):
+        if move == 0:
+            self.move_up()        
+        if move == 1:
+            self.move_down()
+        if move == 2:
+            self.move_left()
+        if move == 3:
+            self.move_right()
+
+    def get_sum(self):
+        total_sum = 0
+        for row in self.matrix:
+            total_sum += sum(row)
+        return total_sum
+
+    def max_num(self):
+        return max(max(self.matrix))
