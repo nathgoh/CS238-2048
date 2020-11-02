@@ -22,14 +22,22 @@ def random_run(game, starting_move):
 def monte_carlo_iter(game):
     best_move = None
     best_total_sum = -1
-    for i in range(1,5):
+
+    # For each move (0 - 3)
+    for i in range(0,4):
         total_sum = 0
-        for i in range(NUM_ITERS):
+
+        # Try lots of paths with that move using random rollout policy
+        for j in range(NUM_ITERS):
             total_sum += random_run(game, i)[1]
         if total_sum > best_total_sum:
             best_move = i
             best_total_sum = total_sum
     game.make_move(best_move)
+
+    for row in game.matrix:
+        print(row)
+    print()
 
 def monte_carlo_run():
     game = Game2048()
