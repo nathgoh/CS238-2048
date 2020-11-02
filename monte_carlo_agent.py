@@ -2,17 +2,19 @@ from logic2048 import Game2048
 import random, copy
 
 """
-lookahead with rollouts (I think)
+montecarlo -- change line 15 for lookahead with rollouts 
+    and use depth
 using the sum of tiles
 """
 
 DEPTH = 10             
-NUM_ITERS = 10         
+NUM_ITERS = 25
+NUM_TRIALS = 10        
 
 def random_run(game, starting_move):
     game_copy = copy.deepcopy(game)
     game_copy.make_move(starting_move)
-    for i in range(DEPTH):
+    while not game.game_end: 
         if game_copy.game_end:
             break
         move = random.randint(0, 3)
@@ -40,16 +42,16 @@ def monte_carlo_run():
     return game.max_num(), game.get_sum() 
 
 def main():
-    max_val_results = [0] * 100
-    total_sum_results = [0] * 100
+    max_val_results = [0] * NUM_TRIALS
+    total_sum_results = [0] * NUM_TRIALS
     
-    for i in range(1000):
+    for i in range(100):
         max_val_results[i], total_sum_results[i] = monte_carlo_run()
         
-    total_sum_avg = sum(total_sum_results) / 100
-    max_val_avg = sum(max_val_results) / 100
+    total_sum_avg = sum(total_sum_results) / NUM_TRIALS
+    max_val_avg = sum(max_val_results) / NUM_TRIALS
 
-    f = open("monte_carlo.txt", "w")
+    f = open("monte_carlo_" + str(DEPTH) + "_" + str(NUM_ITERS) + ".txt", "w")
     f.write("avg max val: " + str(max_val_avg)) 
     f.write("avg total sum: " + str(total_sum_avg))
     f.write("max vals: " + str(max_val_results)) 
