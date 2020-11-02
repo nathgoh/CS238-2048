@@ -6,8 +6,8 @@ lookahead with rollouts (I think)
 using the sum of tiles
 """
 
-DEPTH = 100             
-NUM_ITERS = 100         
+DEPTH = 10             
+NUM_ITERS = 10         
 
 def random_run(game, starting_move):
     game_copy = copy.deepcopy(game)
@@ -22,6 +22,7 @@ def random_run(game, starting_move):
 def monte_carlo_iter(game):
     best_move = None
     best_total_sum = -1
+<<<<<<< HEAD
 
     # For each move (0 - 3)
     for i in range(0,4):
@@ -30,8 +31,14 @@ def monte_carlo_iter(game):
         # Try lots of paths with that move using random rollout policy
         for j in range(NUM_ITERS):
             total_sum += random_run(game, i)[1]
+=======
+    for move in range(0,4):
+        total_sum = 0
+        for i in range(NUM_ITERS):
+            total_sum += random_run(game, move)[1]
+>>>>>>> 49f9924696967d67df3593a5840af29bafed52a1
         if total_sum > best_total_sum:
-            best_move = i
+            best_move = move
             best_total_sum = total_sum
     game.make_move(best_move)
 
@@ -48,14 +55,14 @@ def monte_carlo_run():
     return game.max_num(), game.get_sum() 
 
 def main():
-    max_val_results = [0] * 1000
-    total_sum_results = [0] * 1000
+    max_val_results = [0] * 100
+    total_sum_results = [0] * 100
     
     for i in range(1000):
         max_val_results[i], total_sum_results[i] = monte_carlo_run()
         
-    total_sum_avg = sum(total_sum_results) / 1000
-    max_val_avg = sum(max_val_results) / 1000
+    total_sum_avg = sum(total_sum_results) / 100
+    max_val_avg = sum(max_val_results) / 100
 
     f = open("monte_carlo.txt", "w")
     f.write("avg max val: " + str(max_val_avg)) 
