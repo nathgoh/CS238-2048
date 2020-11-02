@@ -9,7 +9,7 @@ using the sum of tiles
 
 DEPTH = 10             
 NUM_ITERS = 100         
-NUM_TRIALS = 10
+NUM_TRIALS = 100
 
 def random_run(game, starting_move):
     game_copy = copy.deepcopy(game)
@@ -26,20 +26,16 @@ def monte_carlo_iter(game):
     best_total_sum = -1
 
     # For each move (0 - 3)
-    for i in range(0,4):
+    for move in range(0,4):
         total_sum = 0
 
         # Try lots of paths with that move using random rollout policy
-        for j in range(NUM_ITERS):
-            total_sum += random_run(game, i)[1]
+        for move in range(NUM_ITERS):
+            total_sum += random_run(game, move)[1]
         if total_sum > best_total_sum:
-            best_move = i
+            best_move = move
             best_total_sum = total_sum
     game.make_move(best_move)
-
-    for row in game.matrix:
-        print(row)
-    print()
 
 def monte_carlo_run():
     game = Game2048()
