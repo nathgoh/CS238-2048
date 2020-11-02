@@ -14,9 +14,7 @@ NUM_TRIALS = 100
 def random_run(game, starting_move):
     game_copy = copy.deepcopy(game)
     game_copy.make_move(starting_move)
-    while not game.game_end: 
-        if game_copy.game_end:
-            break
+    while not game_copy.game_end: 
         move = random.randint(0, 3)
         game_copy.make_move(move)
     return game_copy.max_num(), game_copy.get_sum() 
@@ -32,6 +30,7 @@ def monte_carlo_iter(game):
         # Try lots of paths with that move using random rollout policy
         for move in range(NUM_ITERS):
             total_sum += random_run(game, move)[1]
+            
         if total_sum > best_total_sum:
             best_move = move
             best_total_sum = total_sum
