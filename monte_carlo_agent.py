@@ -9,6 +9,7 @@ using the sum of tiles
 
 DEPTH = 10             
 NUM_ITERS = 100         
+NUM_TRIALS = 10
 
 def random_run(game, starting_move):
     game_copy = copy.deepcopy(game)
