@@ -31,7 +31,7 @@ def monte_carlo_iter(game):
         for j in range(NUM_ITERS):
             total_sum += random_run(game, i)[1]
         if total_sum > best_total_sum:
-            best_move = move
+            best_move = i
             best_total_sum = total_sum
     game.make_move(best_move)
 
