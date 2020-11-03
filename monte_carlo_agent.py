@@ -28,9 +28,9 @@ def monte_carlo_iter(game):
         total_sum = 0
 
         # Try lots of paths with that move using random rollout policy
-        for move in range(NUM_ITERS):
+        for i in range(NUM_ITERS):
             total_sum += random_run(game, move)[1]
-            
+
         if total_sum > best_total_sum:
             best_move = move
             best_total_sum = total_sum
@@ -40,6 +40,7 @@ def monte_carlo_run():
     game = Game2048()
     while not game.game_end:
         monte_carlo_iter(game)
+
     print("Max Square Value: {}".format(game.max_num()))
     print("Total Square Sum: {}".format(game.get_sum()))
     return game.max_num(), game.get_sum() 
