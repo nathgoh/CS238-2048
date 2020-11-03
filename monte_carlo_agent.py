@@ -1,6 +1,7 @@
 from logic2048 import Game2048
 import random, copy
 import sys
+import time
 
 """
 montecarlo -- change line 15 for lookahead with rollouts 
@@ -99,8 +100,10 @@ def main():
     total_sum_results = [0] * NUM_TRIALS
     total_merge_score = [0] * NUM_TRIALS
     
+    start_time = time.time()
     for i in range(100):
         max_val_results[i], total_sum_results[i], total_merge_score[i] = monte_carlo_run()
+    end_time = time.time()
         
     total_sum_avg = sum(total_sum_results) / NUM_TRIALS
     max_val_avg = sum(max_val_results) / NUM_TRIALS
@@ -118,6 +121,8 @@ def main():
     print("total sum avg: " + str(total_sum_avg))
     print("max val avg: " + str(max_val_avg))
     print("merge score avg: " + str(total_merge_avg))
+    print()
+    print("time taken: ", end_time - start_time)
 
 if __name__ == '__main__':
     main()
