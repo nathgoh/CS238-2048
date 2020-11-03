@@ -6,6 +6,7 @@ class Game2048():
         self.matrix = [[0,0,0,0] for i in range(4)]
         self.matrix[random.randint(0, 3)][random.randint(0, 3)] = random.choice([2, 4])
         self.game_end = False
+        self.merge_score = 0
 
     def __str__(self):
         output = ""
@@ -63,6 +64,7 @@ class Game2048():
             while i < len(s) - 1:
                 if s[i] == s[i+1]:
                     s[i] *= 2
+                    self.merge_score += s[i]
                     s.pop(i+1)
                     i -= 1
                 i += 1
@@ -115,3 +117,6 @@ class Game2048():
 
     def max_num(self):
         return max(map(max, self.matrix))
+
+    def get_merge_score(self):
+        return self.merge_score
