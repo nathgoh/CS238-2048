@@ -2,12 +2,18 @@ from logic2048 import Game2048
 import random, copy
 import sys
 import time
+from datetime import timedelta
 
 """
 montecarlo -- change line 15 for lookahead with rollouts 
     and use depth
 using the sum of tiles
 """
+
+NUM_ITERS = 100       
+NUM_TRIALS = 100
+EVAL_METHOD = 0
+
 def random_run(game):
     game_copy = copy.deepcopy(game)
     while not game_copy.game_end: 
@@ -73,7 +79,7 @@ def monte_carlo_run():
 
     print("Max Square Value: {}".format(game.max_num()))
     print("Total Square Sum: {}".format(game.get_sum()))
-    print("Total Merge Score: {} \n".format(game.get_merge_score()))
+    print("Total Merge Score: {}".format(game.get_merge_score()))
     return game.max_num(), game.get_sum(), game.get_merge_score()
 
 def main():
@@ -81,10 +87,10 @@ def main():
         raise Exception("usage: python3 monte_carlo_agent.py <num_iters> <num_trials> <evaluation_method>")
 
     global NUM_ITERS 
-    NUM_ITERS = int(sys.argv[1])
     global NUM_TRIALS 
-    NUM_TRIALS = int(sys.argv[2])
     global EVAL_METHOD
+    NUM_ITERS = int(sys.argv[1])
+    NUM_TRIALS = int(sys.argv[2])
     EVAL_METHOD = int(sys.argv[3])
 
     # Eval method 0: sum of all tiles
@@ -118,7 +124,8 @@ def main():
     print("total sum avg: " + str(total_sum_avg))
     print("max val avg: " + str(max_val_avg))
     print("merge score avg: " + str(total_merge_avg))
-    print("time taken: ", end_time - start_time)
+    print()
+    print("time taken: ", str(timedelta(seconds=(end_time - start_time))))
 
 if __name__ == '__main__':
     main()
