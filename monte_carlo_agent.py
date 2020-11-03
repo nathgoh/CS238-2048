@@ -22,19 +22,28 @@ def random_run(game, starting_move):
 def monte_carlo_iter(game):
     best_move = None
     best_total_sum = -1
+    best_total_largest = -1
 
     # For each move (0 - 3)
     for move in range(0,4):
         total_sum = 0
+        total_largest = 0
 
         # Try lots of paths with that move using random rollout policy
         for i in range(NUM_ITERS):
-            total_sum += random_run(game, move)[1]
+            output = random_run(game, move)   #0 for largest tile, 1 for sum
+            total_largest += output[0] 
+            total_sum += output[1]
 
-        if total_sum > best_total_sum:
+        if total_largest > best_total_largest or (total_largest == best_total_largest and total_sum > best_total_sum):
             best_move = move
+            best_total_largest = total_largest
             best_total_sum = total_sum
+
     game.make_move(best_move)
+    print(game.max_num())
+    print(game.get_sum())
+    print("--------------------")
 
 def monte_carlo_run():
     game = Game2048()
@@ -56,10 +65,10 @@ def main():
     max_val_avg = sum(max_val_results) / NUM_TRIALS
 
     f = open("monte_carlo_" + str(DEPTH) + "_" + str(NUM_ITERS) + ".txt", "w")
-    f.write("avg max val: " + str(max_val_avg)) 
-    f.write("avg total sum: " + str(total_sum_avg))
-    f.write("max vals: " + str(max_val_results)) 
-    f.write("total sums: " + str(total_sum_results))
+    f.write("avg max val: " + str(max_val_avg) + "\n") 
+    f.write("avg total sum: " + str(total_sum_avg) + "\n")
+    f.write("max vals: " + str(max_val_results) + "\n") 
+    f.write("total sums: " + str(total_sum_results) + "\n")
     f.close()
 
     print("total sum avg: " + str(total_sum_avg))
