@@ -65,11 +65,11 @@ def monte_carlo_iter(game):
                 best_total_merge = total_merge_score
 
     game.make_move(best_move)
-    print(game)
-    print(game.max_num())
-    print(game.get_sum())
-    print(game.get_merge_score())
-    print("--------------------")
+    # print(game)
+    # print(game.max_num())
+    # print(game.get_sum())
+    # print(game.get_merge_score())
+    # print("--------------------")
 
 def monte_carlo_run():
     game = Game2048()
@@ -85,6 +85,9 @@ def main():
     if len(sys.argv) != 4:
         raise Exception("usage: python3 monte_carlo_agent.py <num_iters> <num_trials> <evaluation_method>")
 
+    global NUM_ITERS 
+    global NUM_TRIALS 
+    global EVAL_METHOD
     NUM_ITERS = int(sys.argv[1])
     NUM_TRIALS = int(sys.argv[2])
     EVAL_METHOD = int(sys.argv[3])
@@ -95,7 +98,6 @@ def main():
     if EVAL_METHOD < 0 or EVAL_METHOD > 2:
         raise Exception("Please choose an evaluation between 0-2")
     
-
     max_val_results = [0] * NUM_TRIALS
     total_sum_results = [0] * NUM_TRIALS
     total_merge_score = [0] * NUM_TRIALS
@@ -107,7 +109,7 @@ def main():
         
     total_sum_avg = sum(total_sum_results) / NUM_TRIALS
     max_val_avg = sum(max_val_results) / NUM_TRIALS
-    total_merge_avg = sum(total_merge_avg) / NUM_TRIALS
+    total_merge_avg = sum(total_merge_score) / NUM_TRIALS
 
     f = open("monte_carlo_" + str(NUM_ITERS) + "_" + str(NUM_TRIALS) + "_" + str(EVAL_METHOD) + ".txt", "w")
     f.write("avg max val: " + str(max_val_avg) + "\n") 
