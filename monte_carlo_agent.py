@@ -66,7 +66,7 @@ def monte_carlo_iter(game):
                 best_total_merge = total_merge_score
 
     game.make_move(best_move)
-    # print(game)
+    print(game)
     # print(game.max_num())
     # print(game.get_sum())
     # print(game.get_merge_score())
