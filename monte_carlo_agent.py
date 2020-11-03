@@ -124,7 +124,7 @@ def main():
     print("max val avg: " + str(max_val_avg))
     print("merge score avg: " + str(total_merge_avg))
     print()
-    print("time taken: ", end_time - start_time)
+    print("time taken: ", str(timedelta(seconds=(end_time - start_time)))
 
 if __name__ == '__main__':
     main()
