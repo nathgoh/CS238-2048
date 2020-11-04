@@ -66,7 +66,11 @@ def monte_carlo_iter(game):
                 best_total_merge = total_merge_score
 
     game.make_move(best_move)
+<<<<<<< HEAD
     print(game)
+=======
+    # print(game)
+>>>>>>> main
     # print(game.max_num())
     # print(game.get_sum())
     # print(game.get_merge_score())
@@ -104,7 +108,7 @@ def main():
     total_merge_score = [0] * NUM_TRIALS
     
     start_time = time.time()
-    for i in range(100):
+    for i in range(NUM_TRIALS):
         max_val_results[i], total_sum_results[i], total_merge_score[i] = monte_carlo_run()
     end_time = time.time()
         
