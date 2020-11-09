@@ -22,7 +22,7 @@ def main():
     total_sum_results = [0] * NUM_TRIALS
     total_merge_score = [0] * NUM_TRIALS
     
-    for i in range(100):
+    for i in range(NUM_TRIALS):
         max_val_results[i], total_sum_results[i], total_merge_score[i] = random_run()
         
     total_sum_avg = sum(total_sum_results) / NUM_TRIALS

@@ -91,8 +91,7 @@ def main():
     total_merge_score = [0] * NUM_TRIALS
     
     start_time = time.time()
-    for i in range(100):
-        print("Repetition Number ", i) 
+    for i in range(NUM_TRIALS):
         max_val_results[i], total_sum_results[i], total_merge_score[i] = monte_carlo_run()
     end_time = time.time()
         
