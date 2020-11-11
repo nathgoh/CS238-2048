@@ -4,12 +4,6 @@ import sys
 import time
 from datetime import timedelta
 
-"""
-montecarlo -- change line 15 for lookahead with rollouts 
-    and use depth
-using the sum of tiles
-"""
-
 NUM_ITERS = 100       
 NUM_TRIALS = 100
 EVAL_METHOD = 0
